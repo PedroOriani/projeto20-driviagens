@@ -4,7 +4,7 @@ import citiesRepositories from "../repostories/cities.repositories.js";
 async function create(name) {
     const verifyCity = await citiesRepositories.getCity(name);
 
-    if (verifyCity === 1) throw conflictError("Cidade");
+    if (verifyCity) throw conflictError("Cidade");
 
     return citiesRepositories.create(name);
 }

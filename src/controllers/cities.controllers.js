@@ -4,7 +4,7 @@ async function create (req, res){
 
     const { name } = req.body;
 
-    return citiesServices.create
+    return citiesServices.create(name)
 }
 
 const citiesControllers = {
