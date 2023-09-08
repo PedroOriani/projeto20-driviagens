@@ -1,0 +1,16 @@
+import { conflictError } from "../errors/conflict.js";
+import citiesRepositories from "../repostories/cities.repositories.js";
+
+async function create(name) {
+    const verifyCity = await citiesRepositories.getCity(name);
+
+    if (verifyCity === 1) throw conflictError("Cidade");
+
+    return citiesRepositories.create(name);
+}
+
+const citiesServices = {
+    create
+}
+
+export default citiesServices;
