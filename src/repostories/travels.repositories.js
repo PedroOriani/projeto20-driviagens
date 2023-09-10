@@ -1,4 +1,4 @@
-import { db } from "../database/database.connection";
+import { db } from "../database/database.connection.js";
 
 async function getPassenger (id) {
     const passenger = await db.query(`SELECT * FROM passengers WHERE id=$1;`, [id]);

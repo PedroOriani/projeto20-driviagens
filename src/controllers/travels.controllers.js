@@ -1,6 +1,6 @@
-import travelService from "../services/travels.services";
+import travelService from "../services/travels.services.js";
 
-async function create (passengerId, flightId) {
+async function create () {
 
     const { passengerId, flightId } = req.body;
 

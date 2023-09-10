@@ -3,5 +3,5 @@ import Joi from "joi";
 export const flightSchema = Joi.object({
     origin: Joi.number().integer().required(),
     destination: Joi.number().integer().required(),
-    date: Joi.date().format("dd-mm-yyyy").required()
+    date: Joi.date().required()
 })

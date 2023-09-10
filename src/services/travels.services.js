@@ -1,4 +1,4 @@
-import { notFoundError } from "../errors/notFound";
+import { notFoundError } from "../errors/notFound.js";
 import travelRepository from "../repostories/travels.repositories.js";
 
 async function create (passengerId, flightId) {

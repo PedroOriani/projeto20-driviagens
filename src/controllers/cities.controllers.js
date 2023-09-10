@@ -1,10 +1,13 @@
-import citiesServices from "../services/cities.services";
+import httpStatus from "http-status";
+import citiesServices from "../services/cities.services.js";
 
 async function create (req, res){
 
     const { name } = req.body;
 
-    return citiesServices.create(name)
+    await citiesServices.create(name);
+    console.log("controller")
+    res.sendStatus(httpStatus.CREATED)
 }
 
 const citiesControllers = {
