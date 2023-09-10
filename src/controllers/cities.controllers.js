@@ -6,7 +6,6 @@ async function create (req, res){
     const { name } = req.body;
 
     await citiesServices.create(name);
-    console.log("controller")
     res.sendStatus(httpStatus.CREATED)
 }
 

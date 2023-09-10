@@ -5,6 +5,6 @@ import citiesControllers from "../controllers/cities.controllers.js";
 
 const cityRouter = Router();
 
-cityRouter.post('./cities', validateSchema(citySchema), citiesControllers.create);
+cityRouter.post('/cities', validateSchema(citySchema), citiesControllers.create);
 
 export default cityRouter;

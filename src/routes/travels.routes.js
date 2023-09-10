@@ -5,6 +5,6 @@ import travelController from "../controllers/travels.controllers.js";
 
 const travelRouter = Router();
 
-travelRouter.post('./travels', validateSchema(travelSchema), travelController.create);
+travelRouter.post('/travels', validateSchema(travelSchema), travelController.create);
 
 export default travelRouter;
