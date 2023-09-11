@@ -21,7 +21,10 @@ async function read (origin, destination, smallerDate, biggerDate) {
 
     let query =
         `SELECT
-            flights.id, city1.name AS origin, city2.name AS destination, flights.date
+            flights.id, 
+            city1.name AS origin, 
+            city2.name AS destination, 
+            to_char(flights.date, 'DD-MM-YYY') AS date
         FROM
             flights
         JOIN
