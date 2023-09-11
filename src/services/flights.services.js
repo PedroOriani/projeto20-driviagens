@@ -3,6 +3,7 @@ import fligthRepositories from "../repostories/flights.repositories.js";
 import dayjs from "dayjs";
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore.js';
 import { unprocessableEntityError } from "../errors/unprocessableEntity.js";
+import { badRequest } from "../errors/badRequest.js";
 
 async function create (origin, destination, date){
     const verifyOrigin = await fligthRepositories.getOrigin(origin);
@@ -31,8 +32,35 @@ async function create (origin, destination, date){
     return fligthRepositories.create(origin, destination, date);
 }
 
+async function read (origin, destination, smallerDate, biggerDate) {
+
+    if ((smallerDate && !biggerDate) || (!smallerDate && biggerDate)) throw unprocessableEntityError("smaller-date e bigger-date devem ser passados juntos");
+
+    if (smallerDate && biggerDate) {
+        const smallerParts = smallerDate.split("-")
+        const smallerDay = Number(smallerParts[0])
+        const smallerMonth = Number(smallerParts[1] - 1)
+        const smalleryear = Number(smallerParts[2])
+
+        const biggerParts = biggerDate.split("-")
+        const biggerDay = Number(biggerParts[0])
+        const biggerMonth = Number(biggerParts[1] - 1)
+        const biggeryear = Number(biggerParts[2])
+
+        if (biggeryear < smalleryear) throw badRequest("bigger-date não pode ser menor que smaller-date");
+        if (biggeryear === smalleryear && biggerMonth < smallerMonth) throw badRequest("bigger-date não pode ser menor que smaller-date");
+        if (biggeryear === smalleryear && biggerMonth === smallerMonth && biggerDay < smallerDay) throw badRequest("bigger-date não pode ser menor que smaller-date");
+    }
+
+
+    const flights = await fligthRepositories.read(origin, destination, smallerDate, biggerDate);
+
+    return flights;
+}
+
 const flightServices = {
-    create
+    create,
+    read
 }
 
 export default flightServices

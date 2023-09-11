@@ -19,6 +19,10 @@ export default function errorHandler (error, req, res, next){
         return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message);
     }
 
+    if (error.type === "badRequest"){
+        return res.status(httpStatus.BAD_REQUEST).send(error.message);
+    }
+
     if (error.type === "internalServerError"){
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
     }

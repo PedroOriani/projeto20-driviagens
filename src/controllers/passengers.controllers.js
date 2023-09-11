@@ -19,7 +19,7 @@ async function read (req, res) {
 
     const passengers = await passengersServices.read(name);
 
-    res.status(200).send(passengers)
+    res.status(httpStatus.OK).send(passengers)
 
 }
 
