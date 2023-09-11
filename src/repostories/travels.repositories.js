@@ -11,7 +11,7 @@ async function getFlight (id) {
 }
 
 async function create (passengerId, flightId) {
-    await db.query(`INSERT INTO travels (passengerId, flightId) VALUES ($1, $2);`, [passengerId, flightId]);       
+    await db.query(`INSERT INTO travels ("passengerId", "flightId") VALUES ($1, $2);`, [passengerId, flightId]);       
 }
 
 const travelRepository = {
