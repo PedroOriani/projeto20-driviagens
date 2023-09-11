@@ -11,8 +11,21 @@ async function create (req, res) {
     res.sendStatus(httpStatus.CREATED);
 }
 
+async function read (req, res) {
+
+    const name = req.query.name || "";
+
+    console.log(`name: ${name}`);
+
+    const passengers = await passengersServices.read(name);
+
+    res.status(200).send(passengers)
+
+}
+
 const passengersControllers = {
-    create
+    create,
+    read
 }
 
 export default passengersControllers
