@@ -58,7 +58,7 @@ CREATE TABLE public.flights (
     id integer NOT NULL,
     origin integer NOT NULL,
     destination integer NOT NULL,
-    date date
+    date date NOT NULL
 );
 
 
@@ -88,8 +88,8 @@ ALTER SEQUENCE public.flights_id_seq OWNED BY public.flights.id;
 
 CREATE TABLE public.passengers (
     id integer NOT NULL,
-    firstname text NOT NULL,
-    lastname text NOT NULL
+    "firstName" text NOT NULL,
+    "lastName" text NOT NULL
 );
 
 
@@ -119,8 +119,8 @@ ALTER SEQUENCE public.passengers_id_seq OWNED BY public.passengers.id;
 
 CREATE TABLE public.travels (
     id integer NOT NULL,
-    passengerid integer NOT NULL,
-    flightid integer NOT NULL
+    "passengerId" integer NOT NULL,
+    "flightId" integer NOT NULL
 );
 
 
@@ -176,6 +176,9 @@ ALTER TABLE ONLY public.travels ALTER COLUMN id SET DEFAULT nextval('public.trav
 -- Data for Name: cities; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.cities VALUES (1, 'São Paulo');
+INSERT INTO public.cities VALUES (2, 'Nova York');
+INSERT INTO public.cities VALUES (3, 'Roma');
 
 
 --
@@ -188,6 +191,8 @@ ALTER TABLE ONLY public.travels ALTER COLUMN id SET DEFAULT nextval('public.trav
 -- Data for Name: passengers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.passengers VALUES (1, 'Pedro', 'Oriani');
+INSERT INTO public.passengers VALUES (2, 'André', 'Fraia');
 
 
 --
@@ -200,7 +205,7 @@ ALTER TABLE ONLY public.travels ALTER COLUMN id SET DEFAULT nextval('public.trav
 -- Name: cities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.cities_id_seq', 1, false);
+SELECT pg_catalog.setval('public.cities_id_seq', 3, true);
 
 
 --
@@ -214,7 +219,7 @@ SELECT pg_catalog.setval('public.flights_id_seq', 1, false);
 -- Name: passengers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.passengers_id_seq', 1, false);
+SELECT pg_catalog.setval('public.passengers_id_seq', 2, true);
 
 
 --
@@ -281,19 +286,19 @@ ALTER TABLE ONLY public.flights
 
 
 --
--- Name: travels travels_flightid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: travels travels_flightId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.travels
-    ADD CONSTRAINT travels_flightid_fkey FOREIGN KEY (flightid) REFERENCES public.flights(id);
+    ADD CONSTRAINT "travels_flightId_fkey" FOREIGN KEY ("flightId") REFERENCES public.flights(id);
 
 
 --
--- Name: travels travels_passengerid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: travels travels_passengerId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.travels
-    ADD CONSTRAINT travels_passengerid_fkey FOREIGN KEY (passengerid) REFERENCES public.passengers(id);
+    ADD CONSTRAINT "travels_passengerId_fkey" FOREIGN KEY ("passengerId") REFERENCES public.passengers(id);
 
 
 --
